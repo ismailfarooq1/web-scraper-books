@@ -24,8 +24,13 @@ class BooksInfoSpider(scrapy.Spider):
 
     def page_title(self, response):
         name = response.request.meta['name']
-        
+
+        price = response.xpath("//p[@class='price_color']/text()").get()
+        description = response.xpath("//article/p/text()").get()
+
         yield {
             'name': name,
+            'price': price,
+            'description': description,
         }
 
