@@ -15,8 +15,6 @@ class BooksInfoSpider(scrapy.Spider):
 
         for link in path:
             name_link = link.xpath(".//a/@href").get()
-            # name = link.xpath(".//a/text()").get()
-            # price = link.xpath("//p[@class='price_color']/text()").get()
 
             yield response.follow(url=name_link, callback=self.page_title, headers={
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'
@@ -25,16 +23,12 @@ class BooksInfoSpider(scrapy.Spider):
         next_page = response.xpath("//li[@class='next']/a/@href").get()
     
         if next_page :
-            # absolute_url = f'http://books.toscrape.com/{next_page}'
-
-
             absolute_url = response.urljoin(next_page)
             print(absolute_url)
             print("HELLLLLLDMLSMKSDMSLCKJNDLSCKNSDLCKNDLKSNCLDSKNCSLKDNCSLDKNCSLDKNCSLDNCSLKNDCLSDKNCLKNSD")
             yield scrapy.Request(url=absolute_url, callback=self.parse, headers={
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'
             })
-
 
     def page_title(self, response):
         name = response.xpath("//div[@class='col-sm-6 product_main']/h1/text()").get()
@@ -43,7 +37,5 @@ class BooksInfoSpider(scrapy.Spider):
         yield {
             'name': name,
             'price': price,
-            # 'description': description,
-            # 'next_link': next_link
         }
 
