@@ -13,6 +13,7 @@ BOT_NAME = 'books_website'
 
 SPIDER_MODULES = ['books_website.spiders']
 NEWSPIDER_MODULE = 'books_website.spiders'
+# HTTPERROR_ALLOWED_CODES  =['404']
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
