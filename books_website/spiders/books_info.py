@@ -26,10 +26,12 @@ class BooksInfoSpider(scrapy.Spider):
     
         if next_page :
             # absolute_url = f'http://books.toscrape.com/{next_page}'
-            # print(absolute_url)
-            
+
+
+            absolute_url = response.urljoin(next_page)
+            print(absolute_url)
             print("HELLLLLLDMLSMKSDMSLCKJNDLSCKNSDLCKNDLKSNCLDSKNCSLKDNCSLDKNCSLDKNCSLDNCSLKNDCLSDKNCLKNSD")
-            yield scrapy.Request(url=next_page, callback=self.parse, headers={
+            yield scrapy.Request(url=absolute_url, callback=self.parse, headers={
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'
             })
 
